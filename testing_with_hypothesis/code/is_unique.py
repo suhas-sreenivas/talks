@@ -12,12 +12,11 @@ def is_unique(string):
 
 @given(st.lists(elements = st.characters(max_codepoint=128, blacklist_categories=('Cc', 'Cs')), unique = True))
 def test_unique(string):
-    print(string)
-    assert is_unique(string) == True
+    assert is_unique(''.join(string)) == True
 
 @given(st.lists(elements = st.characters(max_codepoint=128, blacklist_categories=('Cc', 'Cs'))).filter(lambda x: len(set(x)) != len(x)))
 def test_non_unique(string):
-    assert is_unique(string) == False
+    assert is_unique(''.join(string)) == False
 
 if __name__ == "__main__":
     print(is_unique(["'", '3', 'Ȇ', 'Ȇ']))
